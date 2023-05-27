@@ -1,0 +1,53 @@
+import XMonad
+
+import XMonad.Util.Ungrab
+import XMonad.Util.EZConfig
+import XMonad.Actions.DwmPromote
+import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.DynamicLog
+import Graphics.X11.ExtraTypes.XF86
+import XMonad.Hooks.ManageDocks
+
+main :: IO ()
+main = xmonad $ def
+    { modMask = mod4Mask
+    , terminal = myTerminal
+    , startupHook = myStartupHook
+    , borderWidth = 1
+    }
+  `additionalKeysP`
+    [ ("M-S-z", spawn "xscreensaver-command -lock")
+    , ("M-C-s", unGrab *> spawn "scrot -s"        )
+    , ("M-f"  , spawn "firefox"                   )
+    , ("M-<Return>" , dwmpromote)
+    ]
+    `remapKeysP`
+    [ ("M-S-DEL", "M-S-q")
+    , ("M-S-q", "M-S-c")
+    ]
+
+myTerminal = "xfce4-terminal"
+
+myStartupHook = do
+  spawn "xmobar -B white -a right -F blue -t '%LIPB%' -c '[Run Weather \"LIPB\" [] 36000]'"
+  spawn "feh --bg-scale ~/Pictures/Firefox_wallpaper.png"
+  spawn "pgrep firefox || firefox"
+  spawn "pgrep emacs || emacs"
+  spawn "pgrep keepassxc || keepassxc"
+  spawn "pgrep signal || signal-desktop"
+  spawn "mullvad connect"
+  spawn "mullvad"
+  spawn "pgrep redshift || redshift -t 3000:3000 -l 38.90:-77.03"
+  spawn "lxpolkit"
+  spawn "syncthing --no-browser"
+  spawn "pgrep nm-applet || nm-applet"
+  spawn "pgrep xfce4-clipman || xfce4-clipman"
+  spawn "pgrep volumeicon || volumeicon"
+  spawn "pgrep xfce4-power-manager || xfce4-power-manager"
+  spawn "xss-lock -- i3lock -e -c 000000"
+  spawn "numlockx on"
+  spawn "setxkbmap -option 'ctrl:swap_lalt_lctl,caps:escape'"
+  spawn "xset r rate 300 40"
+  spawn "xinput set-prop \"DELL081A:00 044E:120A Touchpad\" \"libinput Tapping Enabled\" 1"
+  spawn "xinput set-prop \"SynPS/2 Synaptics TouchPad\" \"libinput Tapping Enabled\" 1"
+  spawn "xinput set-prop \"DELL081C:00 044E:121F Touchpad\" \"libinput Tapping Enabled\" 1"
