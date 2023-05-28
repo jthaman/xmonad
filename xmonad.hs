@@ -64,7 +64,7 @@ myStartupHook = do
   spawn "pgrep xfce4-power-manager || xfce4-power-manager"
   spawn "xss-lock -- i3lock -e -c 000000"
   spawn "numlockx on"
-  spawn "setxkbmap -option 'ctrl:swap_lalt_lctl,caps:escape'"
+  spawn "setxkbmap -option 'caps:escape, altwin:swap_alt_win'"
   spawn "xset r rate 300 40"
   spawn "xinput set-prop \"DELL081A:00 044E:120A Touchpad\" \"libinput Tapping Enabled\" 1"
   spawn "xinput set-prop \"SynPS/2 Synaptics TouchPad\" \"libinput Tapping Enabled\" 1"
