@@ -7,29 +7,38 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.DynamicLog
 import Graphics.X11.ExtraTypes.XF86
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.StatusBar
+import XMonad.Hooks.StatusBar.PP
 
 main :: IO ()
-main = xmonad $ def
+
+main = xmonad
+     . ewmhFullscreen
+     . ewmh
+     . withEasySB (statusBarProp "xmobar ~/.xmonad/xmobarrc" (pure def)) defToggleStrutsKey
+     $ myConfig
+
+myConfig = def
     { modMask = mod4Mask
     , terminal = myTerminal
     , startupHook = myStartupHook
     , borderWidth = 1
+    -- , layoutHook = myLayout
     }
   `additionalKeysP`
-    [ ("M-S-z", spawn "xscreensaver-command -lock")
-    , ("M-C-s", unGrab *> spawn "scrot -s"        )
-    , ("M-f"  , spawn "firefox"                   )
-    , ("M-<Return>" , dwmpromote)
+    [
+    ("M-<Return>" , dwmpromote)
     ]
     `remapKeysP`
-    [ ("M-S-DEL", "M-S-q")
+    [ ("M-S-<Delete>", "M-S-q")
     , ("M-S-q", "M-S-c")
     ]
 
 myTerminal = "xfce4-terminal"
 
 myStartupHook = do
-  spawn "xmobar -B white -a right -F blue -t '%LIPB%' -c '[Run Weather \"LIPB\" [] 36000]'"
+  spawn "pgrep trayer || trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --tint 0x5f5f5f --height 18"
+  spawn "xmobar"
   spawn "feh --bg-scale ~/Pictures/Firefox_wallpaper.png"
   spawn "pgrep firefox || firefox"
   spawn "pgrep emacs || emacs"
