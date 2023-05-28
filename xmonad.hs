@@ -32,6 +32,8 @@ myConfig = def
   `additionalKeysP`
     [
     ("M-<Return>" , dwmpromote)
+    , ("M-S-l", spawn "systemctl suspend")
+    , ("M-S-p", spawn "systemctl poweroff")
     ]
     `remapKeysP`
     [ ("M-S-<Delete>", "M-S-q")
@@ -39,7 +41,10 @@ myConfig = def
     ]
 
 
-myLayout = spacingWithEdge 10 $ gaps [(U,10), (R,150),  (L, 150), (D, 10)] $ tiled ||| Mirror tiled ||| simpleTabbed ||| Full
+myLayout =
+  spacingWithEdge 10
+  $ gaps [(U,10), (R,200),  (L, 200), (D, 10)]
+  $ tiled ||| Mirror tiled ||| simpleTabbed ||| Full
   where
     tiled   = Tall nmaster delta ratio
     nmaster = 1      -- Default number of windows in the master pane
