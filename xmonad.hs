@@ -9,6 +9,7 @@ import Graphics.X11.ExtraTypes.XF86
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
+import XMonad.Layout.Tabbed
 
 main :: IO ()
 
@@ -23,7 +24,7 @@ myConfig = def
     , terminal = myTerminal
     , startupHook = myStartupHook
     , borderWidth = 1
-    -- , layoutHook = myLayout
+    , layoutHook = myLayout
     }
   `additionalKeysP`
     [
@@ -34,11 +35,19 @@ myConfig = def
     , ("M-S-q", "M-S-c")
     ]
 
+
+myLayout = tiled ||| Mirror tiled ||| simpleTabbed ||| Full
+  where
+    tiled   = Tall nmaster delta ratio
+    nmaster = 1      -- Default number of windows in the master pane
+    ratio   = 1/2    -- Default proportion of screen occupied by master pane
+    delta   = 3/100  -- Percent of screen to increment by when resizing panes
+
 myTerminal = "xfce4-terminal"
 
 myStartupHook = do
   spawn "pgrep trayer || trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --tint 0x5f5f5f --height 18"
-  spawn "xmobar"
+  -- spawn "xmobar"
   spawn "feh --bg-scale ~/Pictures/Firefox_wallpaper.png"
   spawn "pgrep firefox || firefox"
   spawn "pgrep emacs || emacs"
