@@ -26,12 +26,11 @@ myConfig = def
     , borderWidth = 1
     , layoutHook = myLayout
     }
-  `additionalKeysP`
-    [
-    ("M-<Return>" , dwmpromote)
+    `additionalKeysP`
+    [("M-<Return>" , dwmpromote)
     ]
     `remapKeysP`
-    [ ("M-S-<Delete>", "M-S-q")
+    [ ("M-S-<Backspace>", "M-S-q")
     , ("M-S-q", "M-S-c")
     ]
 
