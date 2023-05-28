@@ -10,6 +10,10 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 import XMonad.Layout.Tabbed
+import XMonad.Layout.Gaps
+import XMonad.Layout.Spacing
+import XMonad.Actions.SpawnOn
+import XMonad.Util.Themes
 
 main :: IO ()
 
@@ -26,8 +30,12 @@ myConfig = def
     , borderWidth = 1
     , layoutHook = myLayout
     }
-    `additionalKeysP`
-    [("M-<Return>" , dwmpromote)
+  `additionalKeysP`
+    [
+    ("M-<Return>" , dwmpromote)
+    , ("M-S-l", spawn "systemctl suspend")
+    , ("M-S-p", spawn "systemctl poweroff")
+    , ("M-S-s", spawn "xfce4-screenshooter")
     ]
     `remapKeysP`
     [ ("M-S-<Backspace>", "M-S-q")
@@ -35,7 +43,10 @@ myConfig = def
     ]
 
 
-myLayout = tiled ||| Mirror tiled ||| simpleTabbed ||| Full
+myLayout =
+  spacingWithEdge 10
+  $ gaps [(U,10), (R,200),  (L, 200), (D, 10)]
+  $ tiled ||| Mirror tiled ||| tabbed shrinkText (theme darkTheme) ||| Full
   where
     tiled   = Tall nmaster delta ratio
     nmaster = 1      -- Default number of windows in the master pane
@@ -45,15 +56,16 @@ myLayout = tiled ||| Mirror tiled ||| simpleTabbed ||| Full
 myTerminal = "xfce4-terminal"
 
 myStartupHook = do
-  spawn "pgrep trayer || trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --tint 0x5f5f5f --height 18"
-  -- spawn "xmobar"
+  spawn "xsetroot -cursor_name left_ptr"
+  spawn "pgrep trayer || trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 5 --tint 0x000000 --height 24"
   spawn "feh --bg-scale ~/Pictures/Firefox_wallpaper.png"
-  spawn "pgrep firefox || firefox"
-  spawn "pgrep emacs || emacs"
-  spawn "pgrep keepassxc || keepassxc"
-  spawn "pgrep signal || signal-desktop"
+  spawnOn "2" "pgrep firefox || firefox"
+  spawnOn "3" "pgrep emacs || emacs"
+  spawnOn "2" "pgrep keepassxc || keepassxc"
+  spawnOn "5" "pgrep signal || signal-desktop"
   spawn "mullvad connect"
   spawn "mullvad"
+  spawn "dunst"
   spawn "pgrep redshift || redshift -t 3000:3000 -l 38.90:-77.03"
   spawn "lxpolkit"
   spawn "syncthing --no-browser"
