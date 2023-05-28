@@ -10,6 +10,8 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 import XMonad.Layout.Tabbed
+import XMonad.Layout.Gaps
+
 
 main :: IO ()
 
@@ -36,7 +38,7 @@ myConfig = def
     ]
 
 
-myLayout = tiled ||| Mirror tiled ||| simpleTabbed ||| Full
+myLayout = gaps [(U,10), (R,150),  (L, 150), (D, 10)] $ tiled ||| Mirror tiled ||| simpleTabbed ||| Full
   where
     tiled   = Tall nmaster delta ratio
     nmaster = 1      -- Default number of windows in the master pane
@@ -46,7 +48,7 @@ myLayout = tiled ||| Mirror tiled ||| simpleTabbed ||| Full
 myTerminal = "xfce4-terminal"
 
 myStartupHook = do
-  spawn "pgrep trayer || trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --tint 0x5f5f5f --height 18"
+  spawn "pgrep trayer || trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --tint 0x5f5f5f --height 40"
   -- spawn "xmobar"
   spawn "feh --bg-scale ~/Pictures/Firefox_wallpaper.png"
   spawn "pgrep firefox || firefox"
