@@ -54,8 +54,7 @@ myLayout =
 myTerminal = "xfce4-terminal"
 
 myStartupHook = do
-  spawn "pgrep trayer || trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --tint 0x5f5f5f --height 40"
-  -- spawn "xmobar"
+  spawn "pgrep trayer || trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 5 --tint 0x000000 --height 24"
   spawn "feh --bg-scale ~/Pictures/Firefox_wallpaper.png"
   spawnOn "2" "pgrep firefox || firefox"
   spawnOn "3" "pgrep emacs || emacs"
