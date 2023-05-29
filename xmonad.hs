@@ -45,7 +45,7 @@ myConfig = def
 
 myLayout =
   spacingWithEdge 10
-  $ gaps [(U,10), (R,200),  (L, 200), (D, 10)]
+  $ gaps [(U,0), (R,0),  (L,0), (D,0)]
   $ tiled ||| Mirror tiled ||| tabbed shrinkText (theme darkTheme) ||| Full
   where
     tiled   = Tall nmaster delta ratio
