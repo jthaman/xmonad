@@ -26,11 +26,13 @@ myConfig = def
     , startupHook = myStartupHook
     , borderWidth = 1
     , layoutHook = myLayout
+    , manageHook = manageSpawn
     }
     `additionalKeysP`
     [ ("M-<Return>" , dwmpromote)
     , ("M-S-l", spawn "systemctl suspend")
     , ("M-S-p", spawn "systemctl poweroff")
+    , ("M-S-r", spawn "systemctl reboot")
     , ("M-S-s", spawn "xfce4-screenshooter")
     , ("M-z" , spawn "thunar")
     ]
@@ -65,7 +67,7 @@ myStartupHook = do
   spawn "killall redshift"
   spawn "killall trayer"
   spawn "xsetroot -cursor_name left_ptr"
-  spawn "pgrep trayer || trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --tint 0xffffff --height 24"
+  spawn "pgrep trayer || trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --height 24 --transparent true --alpha 0 --tint 0x000000"
   spawn "feh --bg-scale ~/Pictures/Firefox_wallpaper.png"
   spawnOn "2" "pgrep firefox || firefox"
   spawnOn "3" "pgrep emacs || emacs"
