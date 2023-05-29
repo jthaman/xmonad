@@ -50,15 +50,18 @@ myConfig = def
     , ("M-S-q", "M-S-c")
     ]
 
-myTabConfig = def { activeColor = "#3d3d3d"
-                  , inactiveColor = "#000000"
-                  , urgentColor = "#FDF6E3"
-                  , activeTextColor = "#ffffff"
-                  , inactiveTextColor = "#ffffff"
-                  , urgentTextColor = "#1ABC9C"
-                  , fontName = "xft:Sans:size=10:antialias=true:style=bold"
-                  , decoHeight = 24
-                  }
+myTabConfig = def {
+  activeColor = "#285577"
+  , activeBorderColor = "#4C7899"
+  , activeTextColor = "#ffffff"
+  , inactiveColor = "#222222"
+  , inactiveBorderColor = "#333333"
+  , inactiveTextColor = "#888888"
+  , urgentColor = "#900000"
+  , urgentBorderColor = "#ffffff"
+  , urgentTextColor = "#ffffff"
+  , fontName = "xft:Sans:size=10:antialias=true:style=bold"
+  , decoHeight = 24}
 
 myLayout =
   tiled
