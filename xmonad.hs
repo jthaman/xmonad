@@ -65,7 +65,9 @@ myTabConfig = def {
   , decoHeight = 24}
 
 myLayout =
-  tiled
+    spacingWithEdge 0
+  $ gaps [(U,10), (R,250),  (L, 250), (D, 10)]
+  $ tiled
   ||| Mirror tiled
   ||| tabbed shrinkText myTabConfig
   where
