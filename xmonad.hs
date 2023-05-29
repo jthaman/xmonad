@@ -1,27 +1,24 @@
 import XMonad
 
+import XMonad.Util.Themes
 import XMonad.Util.Ungrab
 import XMonad.Util.EZConfig
+
 import XMonad.Actions.DwmPromote
-import XMonad.Hooks.EwmhDesktops
-import XMonad.Hooks.DynamicLog
+import XMonad.Actions.SpawnOn
+
 import Graphics.X11.ExtraTypes.XF86
+
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
+import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.DynamicLog
+
 import XMonad.Layout.Tabbed
 import XMonad.Layout.Gaps
 import XMonad.Layout.Spacing
-import XMonad.Actions.SpawnOn
-import XMonad.Util.Themes
-
-main :: IO ()
-
-main = xmonad
-     . ewmhFullscreen
-     . ewmh
-     . withEasySB (statusBarProp "xmobar ~/.xmonad/xmobarrc" (pure def)) defToggleStrutsKey
-     $ myConfig
+import XMonad.Layout.Minimize
 
 myConfig = def
     { modMask = mod4Mask
@@ -30,27 +27,38 @@ myConfig = def
     , borderWidth = 1
     , layoutHook = myLayout
     }
-  `additionalKeysP`
-    [
-    ("M-<Return>" , dwmpromote)
+    `additionalKeysP`
+    [ ("M-<Return>" , dwmpromote)
     , ("M-S-l", spawn "systemctl suspend")
     , ("M-S-p", spawn "systemctl poweroff")
     , ("M-S-s", spawn "xfce4-screenshooter")
+    , ("M-z" , spawn "thunar")
     ]
     `remapKeysP`
     [ ("M-S-<Delete>", "M-S-q")
     , ("M-S-q", "M-S-c")
     ]
 
+myTabConfig = def { activeColor = "#3d3d3d"
+                  , inactiveColor = "#000000"
+                  , urgentColor = "#FDF6E3"
+                  , activeTextColor = "#ffffff"
+                  , inactiveTextColor = "#ffffff"
+                  , urgentTextColor = "#1ABC9C"
+                  , fontName = "xft:Sans:size=10:antialias=true"
+                  , decoHeight = 24
+                  }
 
 myLayout =
   spacingWithEdge 10
-  $ gaps [(U,10), (R,200),  (L, 200), (D, 10)]
-  $ tiled ||| Mirror tiled ||| tabbed shrinkText (theme darkTheme) ||| Full
+  $ gaps [(U,10), (R,250),  (L, 250), (D, 10)]
+  $ tiled
+  ||| Mirror tiled
+  ||| tabbed shrinkText myTabConfig
   where
     tiled   = Tall nmaster delta ratio
     nmaster = 1      -- Default number of windows in the master pane
-    ratio   = 1/2    -- Default proportion of screen occupied by master pane
+    ratio   = 0.6    -- Default proportion of screen occupied by master pane
     delta   = 3/100  -- Percent of screen to increment by when resizing panes
 
 myTerminal = "xfce4-terminal"
@@ -80,3 +88,10 @@ myStartupHook = do
   spawn "xinput set-prop \"DELL081A:00 044E:120A Touchpad\" \"libinput Tapping Enabled\" 1"
   spawn "xinput set-prop \"SynPS/2 Synaptics TouchPad\" \"libinput Tapping Enabled\" 1"
   spawn "xinput set-prop \"DELL081C:00 044E:121F Touchpad\" \"libinput Tapping Enabled\" 1"
+
+main :: IO ()
+main = xmonad
+     . ewmhFullscreen
+     . ewmh
+     . withEasySB (statusBarProp "xmobar ~/.xmonad/xmobarrc" (pure def)) defToggleStrutsKey
+     $ myConfig
