@@ -37,6 +37,12 @@ myConfig = def
     , ("M-S-r", spawn "systemctl reboot")
     , ("M-S-s", spawn "xfce4-screenshooter")
     , ("M-z" , spawn "nemo")
+    , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume 0 +5%")
+    , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume 0 -5%")
+    , ("<XF86AudioMute>", spawn "pactl set-sink-mute 0 toggle")
+    , ("<XF86AudioPlay>", spawn "playerctl play-pause")
+    , ("<XF86AudioNext>", spawn "playerctl next")
+    , ("<XF86AudioPrev>", spawn "playerctl previous")
     ]
     `remapKeysP`
     [ ("M-S-<Delete>", "M-S-q")
