@@ -19,12 +19,15 @@ import XMonad.Layout.Tabbed
 import XMonad.Layout.Gaps
 import XMonad.Layout.Spacing
 import XMonad.Layout.Minimize
+import XMonad.Layout.NoBorders
 
 myConfig = def
     { modMask = mod4Mask
     , terminal = myTerminal
     , startupHook = myStartupHook
     , borderWidth = 1
+    , focusedBorderColor = "#000000"
+    , normalBorderColor = "#000000"
     , layoutHook = myLayout
     , manageHook = manageSpawn
     }
@@ -34,7 +37,13 @@ myConfig = def
     , ("M-S-p", spawn "systemctl poweroff")
     , ("M-S-r", spawn "systemctl reboot")
     , ("M-S-s", spawn "xfce4-screenshooter")
-    , ("M-z" , spawn "thunar")
+    , ("M-z" , spawn "nemo")
+    , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume 0 +5%")
+    , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume 0 -5%")
+    , ("<XF86AudioMute>", spawn "pactl set-sink-mute 0 toggle")
+    , ("<XF86AudioPlay>", spawn "playerctl play-pause")
+    , ("<XF86AudioNext>", spawn "playerctl next")
+    , ("<XF86AudioPrev>", spawn "playerctl previous")
     ]
     `remapKeysP`
     [ ("M-S-<Backspace>", "M-S-q")
@@ -62,6 +71,7 @@ myLayout =
     delta   = 3/100  -- Percent of screen to increment by when resizing panes
 
 myTerminal = "xfce4-terminal"
+
 
 myStartupHook = do
   spawn "killall redshift"
