@@ -45,17 +45,14 @@ myTabConfig = def { activeColor = "#3d3d3d"
                   , activeTextColor = "#ffffff"
                   , inactiveTextColor = "#ffffff"
                   , urgentTextColor = "#1ABC9C"
-                  , fontName = "xft:Sans:size=10:antialias=true"
+                  , fontName = "xft:Sans:size=10:antialias=true:style=bold"
                   , decoHeight = 24
                   }
 
 myLayout =
-  spacingWithEdge 10
-  $ gaps [(U,0), (R,0),  (L,0), (D,0)]
-  $ tiled
+  tiled
   ||| Mirror tiled
   ||| tabbed shrinkText myTabConfig
-
   where
     tiled   = Tall nmaster delta ratio
     nmaster = 1      -- Default number of windows in the master pane
@@ -65,8 +62,10 @@ myLayout =
 myTerminal = "xfce4-terminal"
 
 myStartupHook = do
+  spawn "killall redshift"
+  spawn "killall trayer"
   spawn "xsetroot -cursor_name left_ptr"
-  spawn "pgrep trayer || trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 5 --tint 0x000000 --height 24"
+  spawn "pgrep trayer || trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --tint 0xffffff --height 24"
   spawn "feh --bg-scale ~/Pictures/Firefox_wallpaper.png"
   spawnOn "2" "pgrep firefox || firefox"
   spawnOn "3" "pgrep emacs || emacs"
