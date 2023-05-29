@@ -19,12 +19,15 @@ import XMonad.Layout.Tabbed
 import XMonad.Layout.Gaps
 import XMonad.Layout.Spacing
 import XMonad.Layout.Minimize
+import XMonad.Layout.NoBorders
 
 myConfig = def
     { modMask = mod4Mask
     , terminal = myTerminal
     , startupHook = myStartupHook
     , borderWidth = 1
+    , focusedBorderColor = "#000000"
+    , normalBorderColor = "#000000"
     , layoutHook = myLayout
     }
     `additionalKeysP`
@@ -45,7 +48,7 @@ myTabConfig = def { activeColor = "#3d3d3d"
                   , activeTextColor = "#ffffff"
                   , inactiveTextColor = "#ffffff"
                   , urgentTextColor = "#1ABC9C"
-                  , fontName = "xft:Sans:size=10:antialias=true"
+                  , fontName = "xft:Sans:size=10:antialias=true:style=bold"
                   , decoHeight = 24
                   }
 
@@ -62,6 +65,7 @@ myLayout =
     delta   = 3/100  -- Percent of screen to increment by when resizing panes
 
 myTerminal = "xfce4-terminal"
+
 
 myStartupHook = do
   spawn "xsetroot -cursor_name left_ptr"
