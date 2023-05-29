@@ -34,8 +34,9 @@ myConfig = def
     [ ("M-<Return>" , dwmpromote)
     , ("M-S-l", spawn "systemctl suspend")
     , ("M-S-p", spawn "systemctl poweroff")
+    , ("M-S-r", spawn "systemctl reboot")
     , ("M-S-s", spawn "xfce4-screenshooter")
-    , ("M-z" , spawn "thunar")
+    , ("M-z" , spawn "nemo")
     ]
     `remapKeysP`
     [ ("M-S-<Delete>", "M-S-q")
