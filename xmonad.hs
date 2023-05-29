@@ -61,7 +61,7 @@ myTabConfig = def {
   , urgentColor = "#900000"
   , urgentBorderColor = "#ffffff"
   , urgentTextColor = "#ffffff"
-  , fontName = "xft:Sans:size=16:antialias=true:style=bold"
+  , fontName = "xft:Sans:size=10:antialias=true:style=bold"
   , decoHeight = 24}
 
 myLayout =
@@ -81,8 +81,9 @@ myStartupHook = do
   spawn "killall redshift"
   spawn "killall trayer"
   spawn "xsetroot -cursor_name left_ptr"
-  spawn "pgrep trayer || trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --height 24 --transparent true --alpha 0 --tint 0x000000"
+  spawn "pgrep trayer || trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --height 36 --transparent true --alpha 0 --tint 0x000000"
   spawn "feh --bg-scale ~/Pictures/Firefox_wallpaper.png"
+  spawnOn "1" "pgrep thunderbird || thunderbird"
   spawnOn "2" "pgrep firefox || firefox"
   spawnOn "3" "pgrep emacs || emacs"
   spawnOn "2" "pgrep keepassxc || keepassxc"
