@@ -30,6 +30,7 @@ myConfig = def
     , focusedBorderColor = "#000000"
     , normalBorderColor = "#000000"
     , layoutHook = myLayout
+    , manageHook = manageSpawn
     }
     `additionalKeysP`
     [ ("M-<Return>" , dwmpromote)
@@ -46,24 +47,25 @@ myConfig = def
     , ("<XF86AudioPrev>", spawn "playerctl previous")
     ]
     `remapKeysP`
-    [ ("M-S-<Delete>", "M-S-q")
+    [ ("M-S-<Backspace>", "M-S-q")
     , ("M-S-q", "M-S-c")
     ]
 
-myTabConfig = def { activeColor = "#3d3d3d"
-                  , inactiveColor = "#000000"
-                  , urgentColor = "#FDF6E3"
-                  , activeTextColor = "#ffffff"
-                  , inactiveTextColor = "#ffffff"
-                  , urgentTextColor = "#1ABC9C"
-                  , fontName = "xft:Sans:size=10:antialias=true:style=bold"
-                  , decoHeight = 24
-                  }
+myTabConfig = def {
+  activeColor = "#285577"
+  , activeBorderColor = "#4C7899"
+  , activeTextColor = "#ffffff"
+  , inactiveColor = "#222222"
+  , inactiveBorderColor = "#333333"
+  , inactiveTextColor = "#888888"
+  , urgentColor = "#900000"
+  , urgentBorderColor = "#ffffff"
+  , urgentTextColor = "#ffffff"
+  , fontName = "xft:Sans:size=16:antialias=true:style=bold"
+  , decoHeight = 24}
 
 myLayout =
-  spacingWithEdge 10
-  $ gaps [(U,10), (R,250),  (L, 250), (D, 10)]
-  $ tiled
+  tiled
   ||| Mirror tiled
   ||| tabbed shrinkText myTabConfig
   where
@@ -74,8 +76,10 @@ myLayout =
 
 
 myStartupHook = do
+  spawn "killall redshift"
+  spawn "killall trayer"
   spawn "xsetroot -cursor_name left_ptr"
-  spawn "pgrep trayer || trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 5 --tint 0x000000 --height 24"
+  spawn "pgrep trayer || trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --height 24 --transparent true --alpha 0 --tint 0x000000"
   spawn "feh --bg-scale ~/Pictures/Firefox_wallpaper.png"
   spawnOn "2" "pgrep firefox || firefox"
   spawnOn "3" "pgrep emacs || emacs"
