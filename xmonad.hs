@@ -16,8 +16,8 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.DynamicLog
 
 import XMonad.Layout.Tabbed
-import XMonad.Layout.Gaps
-import XMonad.Layout.Spacing
+-- import XMonad.Layout.Gaps
+-- import XMonad.Layout.Spacing
 import XMonad.Layout.Minimize
 import XMonad.Layout.NoBorders
 
@@ -75,17 +75,20 @@ myLayout =
 
 myTerminal = "xfce4-terminal"
 
-
 myStartupHook = do
+  -- GUI Programs
+  spawnOn "1" "pgrep thunderbird || thunderbird"
+  spawnOn "2" "pgrep firefox || firefox"
+  spawnOn "2" "pgrep keepassxc || keepassxc"
+  spawnOn "3" "pgrep emacs || emacs"
+--  spawnOn "4" "pgrep rhythmbox || rhythmbox"
+  spawnOn "5" "pgrep signal || signal-desktop"
+  -- Programs
   spawn "killall redshift"
   spawn "killall trayer"
   spawn "xsetroot -cursor_name left_ptr"
   spawn "pgrep trayer || trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --height 24 --transparent true --alpha 0 --tint 0x000000"
   spawn "feh --bg-scale ~/Pictures/Firefox_wallpaper.png"
-  spawnOn "2" "pgrep firefox || firefox"
-  spawnOn "3" "pgrep emacs || emacs"
-  spawnOn "2" "pgrep keepassxc || keepassxc"
-  spawnOn "5" "pgrep signal || signal-desktop"
   spawn "mullvad connect"
   spawn "mullvad"
   spawn "dunst"
@@ -103,6 +106,7 @@ myStartupHook = do
   spawn "xinput set-prop \"DELL081A:00 044E:120A Touchpad\" \"libinput Tapping Enabled\" 1"
   spawn "xinput set-prop \"SynPS/2 Synaptics TouchPad\" \"libinput Tapping Enabled\" 1"
   spawn "xinput set-prop \"DELL081C:00 044E:121F Touchpad\" \"libinput Tapping Enabled\" 1"
+  spawn "xinput set-prop \"DELL081C:00 044E:121F Touchpad\" \"libinput Accel Speed\" 0.2"
 
 main :: IO ()
 main = xmonad

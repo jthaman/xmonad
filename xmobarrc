@@ -3,8 +3,8 @@ Config { overrideRedirect = False
        , bgColor  = "#000000"
        , fgColor  = "#f8f8f2"
        , position       = TopSize L 90 24
-       , commands = [ Run Weather "EGPF"
-                        [ "--template", "<weather> <tempC>°C"
+       , commands = [ Run Weather "KGAI"
+                        [ "--template", "<weather> <tempF>°F"
                         , "-L", "0"
                         , "-H", "25"
                         , "--low"   , "lightblue"
