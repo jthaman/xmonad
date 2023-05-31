@@ -16,14 +16,12 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.DynamicLog
 
 import XMonad.Layout.Tabbed
--- import XMonad.Layout.Gaps
--- import XMonad.Layout.Spacing
 import XMonad.Layout.Minimize
 import XMonad.Layout.NoBorders
 
 myConfig = def
     { modMask = mod4Mask
-    , terminal = myTerminal
+    , terminal = "xfce4-terminal"
     , startupHook = myStartupHook
     , borderWidth = 1
     , focusedBorderColor = "#000000"
@@ -73,8 +71,6 @@ myLayout =
     ratio   = 0.6    -- Default proportion of screen occupied by master pane
     delta   = 3/100  -- Percent of screen to increment by when resizing panes
 
-myTerminal = "xfce4-terminal"
-
 myStartupHook = do
   -- GUI Programs
   spawnOn "1" "pgrep thunderbird || thunderbird"
@@ -92,7 +88,7 @@ myStartupHook = do
   spawn "mullvad connect"
   spawn "mullvad"
   spawn "dunst"
-  spawn "pgrep redshift || redshift -t 3000:3000 -l 38.90:-77.03"
+  spawn "pgrep redshift || redshift -t 2500:3000 -l 38.90:-77.03"
   spawn "lxpolkit"
   spawn "syncthing --no-browser"
   spawn "pgrep nm-applet || nm-applet"
