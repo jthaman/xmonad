@@ -46,6 +46,8 @@ myConfig = def
     `remapKeysP`
     [ ("M-S-<Backspace>", "M-S-q")
     , ("M-S-q", "M-S-c")
+    ]`removeKeysP`
+    [ ("M-S-c")
     ]
 
 myTabConfig = def {
