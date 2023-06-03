@@ -87,6 +87,7 @@ myStartupHook = do
   spawnOn "2" "pgrep firefox || firefox"
   spawnOn "3" "pgrep emacs || emacs"
   spawnOn "2" "pgrep keepassxc || keepassxc"
+  spawnOn "4" "pgrep rhythmbox || rhythmbox"
   spawnOn "5" "pgrep signal || signal-desktop"
   spawn "mullvad connect"
   spawn "mullvad"

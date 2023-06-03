@@ -3,10 +3,10 @@ Config { overrideRedirect = False
        , bgColor  = "#000000"
        , fgColor  = "#f8f8f2"
        , position       = TopSize L 95 36
-       , commands = [ Run Weather "EGPF"
-                        [ "--template", "<weather> <tempC>°C"
+       , commands = [ Run Weather "KGAI"
+                        [ "--template", "<weather> <tempF>°F"
                         , "-L", "0"
-                        , "-H", "25"
+                        , "-H", "90"
                         , "--low"   , "lightblue"
                         , "--normal", "#f8f8f2"
                         , "--high"  , "red"
@@ -30,5 +30,5 @@ Config { overrideRedirect = False
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = "%XMonadLog% }{ %alsa:default:Master% | %cpu% | %memory% * %swap% | %EGPF% | %date% "
+       , template = "%XMonadLog% }{ %alsa:default:Master% | %cpu% | %memory% * %swap% | %KGAI% | %date% "
        }
