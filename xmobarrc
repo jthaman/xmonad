@@ -6,7 +6,7 @@ Config { overrideRedirect = False
        , commands = [ Run Weather "KGAI"
                         [ "--template", "<weather> <tempF>°F"
                         , "-L", "0"
-                        , "-H", "25"
+                        , "-H", "90"
                         , "--low"   , "lightblue"
                         , "--normal", "#f8f8f2"
                         , "--high"  , "red"
@@ -30,5 +30,5 @@ Config { overrideRedirect = False
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = "%XMonadLog% }{ %alsa:default:Master% | %cpu% | %memory% * %swap% | %EGPF% | %date% "
+       , template = "%XMonadLog% }{ %cpu% | %memory% * %swap% | %KGAI% | %date% "
        }
