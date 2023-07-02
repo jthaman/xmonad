@@ -43,12 +43,6 @@ myConfig = def
     , ("<XF86AudioNext>", spawn "playerctl next")
     , ("<XF86AudioPrev>", spawn "playerctl previous")
     ]
-    `remapKeysP`
-    [ ("M-S-<Backspace>", "M-S-q")
-    , ("M-S-q", "M-S-c")
-    ]`removeKeysP`
-    [ ("M-S-c")
-    ]
 
 myTabConfig = def {
   activeColor = "#285577"
@@ -75,7 +69,7 @@ myLayout =
 
 myStartupHook = do
   -- GUI Programs
-  spawnOn "1" "pgrep thunderbird || thunderbird"
+  -- spawnOn "1" "pgrep thunderbird || thunderbird"
   spawnOn "2" "pgrep firefox || firefox"
   spawnOn "2" "pgrep keepassxc || keepassxc"
   spawnOn "3" "pgrep emacs || emacs"
@@ -90,7 +84,7 @@ myStartupHook = do
   spawn "mullvad connect"
   spawn "mullvad"
   spawn "dunst"
-  spawn "pgrep redshift || redshift -t 2500:3000 -l 38.90:-77.03"
+  spawn "pgrep redshift || redshift -t 4000:4000 -l 38.90:-77.03"
   spawn "lxpolkit"
   spawn "syncthing --no-browser"
   spawn "pgrep nm-applet || nm-applet"
