@@ -1,5 +1,5 @@
 Config { overrideRedirect = False
-       , font     = "xft:Sans:size=10:antialias=true:style=bold"
+       , font     = "Cantarell Bold 13"
        , bgColor  = "#000000"
        , fgColor  = "#f8f8f2"
        , position       = TopSize L 90 24
