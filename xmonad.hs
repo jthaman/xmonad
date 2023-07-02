@@ -70,8 +70,8 @@ myLayout =
 myStartupHook = do
   -- GUI Programs
   -- spawnOn "1" "pgrep thunderbird || thunderbird"
+  spawnOn "1" "pgrep keepassxc || keepassxc"
   spawnOn "2" "pgrep firefox || firefox"
-  spawnOn "2" "pgrep keepassxc || keepassxc"
   spawnOn "3" "pgrep emacs || emacs"
 --  spawnOn "4" "pgrep rhythmbox || rhythmbox"
   spawnOn "5" "pgrep signal || signal-desktop"
