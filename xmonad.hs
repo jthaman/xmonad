@@ -4,6 +4,9 @@ import XMonad.Util.Themes
 import XMonad.Util.Ungrab
 import XMonad.Util.EZConfig
 
+import System.Exit
+import XMonad.Prompt.ConfirmPrompt
+
 import XMonad.Actions.DwmPromote
 import XMonad.Actions.SpawnOn
 
@@ -18,6 +21,8 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Layout.Tabbed
 import XMonad.Layout.Minimize
 import XMonad.Layout.NoBorders
+import XMonad.Layout.Spacing
+import XMonad.Layout.Gaps
 
 myConfig = def
     { modMask = mod4Mask
@@ -31,6 +36,7 @@ myConfig = def
     }
     `additionalKeysP`
     [ ("M-<Return>" , dwmpromote)
+    , ("M-S-q", confirmPrompt def "exit" $ io (exitWith ExitSuccess))
     , ("M-S-l", spawn "systemctl suspend")
     , ("M-S-p", spawn "systemctl poweroff")
     , ("M-S-r", spawn "systemctl reboot")
@@ -58,7 +64,9 @@ myTabConfig = def {
   , decoHeight = 24}
 
 myLayout =
-  tiled
+  spacingRaw False (Border 10 0 10 0) True (Border 0 10 0 10) True
+  $ gaps [(U,5), (R,5), (L,5), (D,5)]
+  $ tiled
   ||| Mirror tiled
   ||| tabbed shrinkText myTabConfig
   where
