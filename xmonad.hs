@@ -9,6 +9,7 @@ import XMonad.Prompt.ConfirmPrompt
 
 import XMonad.Actions.DwmPromote
 import XMonad.Actions.SpawnOn
+import XMonad.Actions.Minimize
 
 import Graphics.X11.ExtraTypes.XF86
 
@@ -23,6 +24,7 @@ import XMonad.Layout.Minimize
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Spacing
 import XMonad.Layout.Gaps
+import qualified XMonad.Layout.BoringWindows as BW
 
 myConfig = def
     { modMask = mod4Mask
@@ -42,6 +44,8 @@ myConfig = def
     , ("M-S-r", spawn "systemctl reboot")
     , ("M-S-s", spawn "xfce4-screenshooter")
     , ("M-z" , spawn "nemo")
+    , ("M-m", withFocused minimizeWindow)
+    , ("M-S-m", withLastMinimized maximizeWindowAndFocus)
     , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume 0 +5%")
     , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume 0 -5%")
     , ("<XF86AudioMute>", spawn "pactl set-sink-mute 0 toggle")
@@ -64,7 +68,8 @@ myTabConfig = def {
   , decoHeight = 24}
 
 myLayout =
-  spacingRaw False (Border 10 0 10 0) True (Border 0 10 0 10) True
+  minimize . BW.boringWindows
+  $ spacingRaw False (Border 10 0 10 0) True (Border 0 10 0 10) True
   $ gaps [(U,5), (R,5), (L,5), (D,5)]
   $ tiled
   ||| Mirror tiled
