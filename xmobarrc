@@ -2,7 +2,7 @@ Config { overrideRedirect = False
        , font     = "Sans Bold 16"
        , bgColor  = "#000000"
        , fgColor  = "#f8f8f2"
-       , position       = TopSize L 95 36
+       , position       = TopSize L 92 36
        , commands = [ Run Weather "KGAI"
                         [ "--template", "<weather> <tempF>°F"
                         , "-L", "0"
