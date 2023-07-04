@@ -116,8 +116,8 @@ myStartupHook = do
   spawn "xinput set-prop \"SynPS/2 Synaptics TouchPad\" \"libinput Tapping Enabled\" 1"
   spawn "xinput set-prop \"DELL081C:00 044E:121F Touchpad\" \"libinput Tapping Enabled\" 1"
   spawn "xinput set-prop \"DELL081C:00 044E:121F Touchpad\" \"libinput Accel Speed\" 0.2"
-  addScreenCorners [ (SCLowerRight, nextWS)
-                     , (SCLowerLeft,  prevWS)
+  addScreenCorners [ (SCLowerRight, moveTo Next (Not emptyWS))
+                     , (SCLowerLeft,  moveTo Prev (Not emptyWS))
                      ]
   addScreenCorner SCUpperLeft (goToSelected def { gs_cellwidth = 200})
 
