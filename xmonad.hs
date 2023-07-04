@@ -10,6 +10,7 @@ import XMonad.Prompt.ConfirmPrompt
 import XMonad.Actions.DwmPromote
 import XMonad.Actions.SpawnOn
 import XMonad.Actions.Minimize
+import XMonad.Actions.CycleWS
 
 import Graphics.X11.ExtraTypes.XF86
 
@@ -21,7 +22,6 @@ import XMonad.Hooks.DynamicLog
 
 import XMonad.Layout.Tabbed
 import XMonad.Layout.Minimize
-import XMonad.Layout.NoBorders
 import XMonad.Layout.Spacing
 import XMonad.Layout.Gaps
 import qualified XMonad.Layout.BoringWindows as BW
@@ -69,7 +69,7 @@ myTabConfig = def {
 
 myLayout =
   minimize . BW.boringWindows
-  $ spacingRaw False (Border 10 0 10 0) True (Border 0 10 0 10) True
+  $ spacingRaw False (Border 10 5 10 5) True (Border 5 10 5 10) True
   $ gaps [(U,5), (R,5), (L,5), (D,5)]
   $ tiled
   ||| Mirror tiled
@@ -92,7 +92,7 @@ myStartupHook = do
   spawn "killall redshift"
   spawn "killall trayer"
   spawn "xsetroot -cursor_name left_ptr"
-  spawn "pgrep trayer || trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --height 24 --transparent true --alpha 0 --tint 0x000000"
+  spawn "pgrep trayer || trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 5 --height 24 --transparent true --alpha 0 --tint 0x000000"
   spawn "feh --bg-scale ~/Pictures/Firefox_wallpaper.png"
   spawn "mullvad connect"
   spawn "mullvad"
@@ -104,7 +104,7 @@ myStartupHook = do
   spawn "pgrep xfce4-clipman || xfce4-clipman"
   spawn "pgrep volumeicon || volumeicon"
   spawn "pgrep xfce4-power-manager || xfce4-power-manager"
-  spawn "xss-lock -- i3lock -e -c 000000"
+  spawn "xss-lock -- xsecurelock"
   spawn "numlockx on"
   spawn "setxkbmap -option 'ctrl:swap_lalt_lctl,caps:escape'"
   spawn "xset r rate 300 40"
