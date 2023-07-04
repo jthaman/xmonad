@@ -3,14 +3,14 @@ Config { overrideRedirect = False
        , bgColor  = "#000000"
        , fgColor  = "#f8f8f2"
        , position       = TopSize L 95 24
-       , commands = [ Run Weather "KGAI"
+       , commands = [ Run Weather "KDCA"
                         [ "--template", "<weather> <tempF>°F"
                         , "-L", "0"
                         , "-H", "90"
                         , "--low"   , "lightblue"
                         , "--normal", "#f8f8f2"
                         , "--high"  , "red"
-                        ] 36000
+                        ] 3600
                     , Run Cpu
                         [ "-L", "3"
                         , "-H", "50"
@@ -30,5 +30,5 @@ Config { overrideRedirect = False
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = "%XMonadLog% }{ %KGAI% | %date% "
+       , template = "%XMonadLog% }{ %KDCA% | %date% "
        }
