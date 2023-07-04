@@ -20,7 +20,6 @@ import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ScreenCorners
-import XMonad.Actions.GridSelect
 
 import XMonad.Layout.Tabbed
 import XMonad.Layout.Minimize
@@ -108,7 +107,7 @@ myStartupHook = do
   spawn "pgrep xfce4-clipman || xfce4-clipman"
   spawn "pgrep volumeicon || volumeicon"
   spawn "pgrep xfce4-power-manager || xfce4-power-manager"
-  spawn "xss-lock -- xsecurelock"
+  spawn "xss-lock -l -- xsecurelock"
   spawn "numlockx on"
   spawn "setxkbmap -option 'ctrl:swap_lalt_lctl,caps:escape'"
   spawn "xset r rate 300 40"
