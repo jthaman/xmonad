@@ -19,6 +19,8 @@ import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ScreenCorners
+import XMonad.Actions.GridSelect
 
 import XMonad.Layout.Tabbed
 import XMonad.Layout.Minimize
@@ -35,6 +37,7 @@ myConfig = def
     , normalBorderColor = "#000000"
     , layoutHook = myLayout
     , manageHook = manageSpawn
+    , handleEventHook = myEventHook
     }
     `additionalKeysP`
     [ ("M-<Return>" , dwmpromote)
@@ -68,7 +71,8 @@ myTabConfig = def {
   , decoHeight = 24}
 
 myLayout =
-  minimize . BW.boringWindows
+  screenCornerLayoutHook
+  $ minimize . BW.boringWindows
   $ spacingRaw False (Border 10 5 10 5) True (Border 5 10 5 10) True
   $ gaps [(U,5), (R,5), (L,5), (D,5)]
   $ tiled
@@ -112,6 +116,12 @@ myStartupHook = do
   spawn "xinput set-prop \"SynPS/2 Synaptics TouchPad\" \"libinput Tapping Enabled\" 1"
   spawn "xinput set-prop \"DELL081C:00 044E:121F Touchpad\" \"libinput Tapping Enabled\" 1"
   spawn "xinput set-prop \"DELL081C:00 044E:121F Touchpad\" \"libinput Accel Speed\" 0.2"
+  addScreenCorners [ (SCLowerRight, nextWS)
+                     , (SCLowerLeft,  prevWS)
+                     ]
+  addScreenCorner SCUpperLeft (goToSelected def { gs_cellwidth = 200})
+
+myEventHook = screenCornerEventHook
 
 main :: IO ()
 main = xmonad
