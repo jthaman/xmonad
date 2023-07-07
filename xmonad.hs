@@ -45,7 +45,8 @@ myConfig = def
     , ("M-S-p", spawn "systemctl poweroff")
     , ("M-S-r", spawn "systemctl reboot")
     , ("M-S-s", spawn "xfce4-screenshooter")
-    , ("M-z" , spawn "nemo")
+    , ("M-z", spawn "nemo")
+    , ("M-x", spawn "catfish")
     , ("M-m", withFocused minimizeWindow)
     , ("M-S-m", withLastMinimized maximizeWindowAndFocus)
     , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume 0 +5%")
@@ -99,7 +100,7 @@ myStartupHook = do
   spawn "feh --bg-scale ~/Pictures/Firefox_wallpaper.png"
   spawn "mullvad connect"
   spawn "mullvad"
-  spawn "dunst"
+  -- spawn "dunst"
   spawn "pgrep redshift || redshift -t 4000:4000 -l 38.90:-77.03"
   spawn "lxpolkit"
   spawn "syncthing --no-browser"
