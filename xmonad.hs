@@ -26,6 +26,7 @@ import XMonad.Layout.Spacing
 import XMonad.Layout.Gaps
 import qualified XMonad.Layout.BoringWindows as BW
 
+
 myConfig = def
     { modMask = mod4Mask
     , terminal = "xfce4-terminal"
