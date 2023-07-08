@@ -21,7 +21,6 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ScreenCorners
 
-import XMonad.Layout.Tabbed
 import XMonad.Layout.Minimize
 import XMonad.Layout.Spacing
 import XMonad.Layout.Gaps
@@ -57,19 +56,6 @@ myConfig = def
     , ("<XF86AudioPrev>", spawn "playerctl previous")
     ]
 
-myTabConfig = def {
-  activeColor = "#285577"
-  , activeBorderColor = "#4C7899"
-  , activeTextColor = "#ffffff"
-  , inactiveColor = "#222222"
-  , inactiveBorderColor = "#333333"
-  , inactiveTextColor = "#888888"
-  , urgentColor = "#900000"
-  , urgentBorderColor = "#ffffff"
-  , urgentTextColor = "#ffffff"
-  , fontName = "xft:Sans:size=10:antialias=true:style=bold"
-  , decoHeight = 24}
-
 myLayout =
   screenCornerLayoutHook
   $ minimize . BW.boringWindows
@@ -77,7 +63,7 @@ myLayout =
   $ gaps [(U,5), (R,5), (L,5), (D,5)]
   $ tiled
   ||| Mirror tiled
-  ||| tabbed shrinkText myTabConfig
+  ||| Full
   where
     tiled   = Tall nmaster delta ratio
     nmaster = 1      -- Default number of windows in the master pane
