@@ -83,7 +83,7 @@ myStartupHook = do
   spawn "killall redshift"
   spawn "killall trayer"
   spawn "xsetroot -cursor_name left_ptr"
-  spawn "pgrep trayer || trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 5 --height 24 --transparent true --alpha 0 --tint 0x000000"
+  spawn "pgrep trayer || trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 7 --height 24 --transparent true --alpha 0 --tint 0x000000"
   spawn "feh --bg-scale ~/Pictures/Firefox_wallpaper.png"
   spawn "mullvad connect"
   spawn "mullvad"

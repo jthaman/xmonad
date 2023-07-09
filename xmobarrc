@@ -2,7 +2,7 @@ Config { overrideRedirect = False
        , font     = "Cantarell Bold 13"
        , bgColor  = "#000000"
        , fgColor  = "#f8f8f2"
-       , position       = TopSize L 95 24
+       , position       = TopSize L 93 24
        , commands = [ Run Weather "KDCA"
                         [ "--template", "<weather> <tempF>°F"
                         , "-L", "0"
