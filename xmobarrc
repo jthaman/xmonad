@@ -1,5 +1,5 @@
 Config { overrideRedirect = False
-       , font     = "Cantarell Bold 13"
+       , font     = "Cantarell Bold 22"
        , bgColor  = "#000000"
        , fgColor  = "#f8f8f2"
        , position       = TopSize L 93 24

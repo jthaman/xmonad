@@ -28,7 +28,7 @@ import qualified XMonad.Layout.BoringWindows as BW
 
 
 myConfig = def
-    { modMask = mod4Mask
+    { modMask = mod1Mask
     , terminal = "xfce4-terminal"
     , startupHook = myStartupHook
     , borderWidth = 5
@@ -46,6 +46,8 @@ myConfig = def
     , ("M-S-r", spawn "systemctl reboot")
     , ("M-S-s", spawn "xfce4-screenshooter")
     , ("M-z", spawn "nemo")
+    , ("M-p", spawn "rofi -show drun") -- use rofi for showing flatpaks
+    , ("M-S-<Return>", spawn "gnome-terminal")
     , ("M-x", spawn "catfish")
     , ("M-m", withFocused minimizeWindow)
     , ("M-S-m", withLastMinimized maximizeWindowAndFocus)
@@ -61,7 +63,7 @@ myLayout =
   screenCornerLayoutHook
   $ minimize . BW.boringWindows
   $ spacingRaw False (Border 10 5 10 5) True (Border 5 10 5 10) True
-  $ gaps [(U,5), (R,5), (L,5), (D,5)]
+  $ gaps [(U,5), (R,150), (L,150), (D,5)]
   $ tiled
   ||| Mirror tiled
   ||| Full
@@ -97,12 +99,8 @@ myStartupHook = do
   spawn "pgrep xfce4-power-manager || xfce4-power-manager"
   spawn "xss-lock -l -- xsecurelock"
   spawn "numlockx on"
-  spawn "setxkbmap -option 'ctrl:swap_lalt_lctl,caps:escape'"
+  spawn "setxkbmap -option 'caps:escape'"
   spawn "xset r rate 300 40"
-  spawn "xinput set-prop \"DELL081A:00 044E:120A Touchpad\" \"libinput Tapping Enabled\" 1"
-  spawn "xinput set-prop \"SynPS/2 Synaptics TouchPad\" \"libinput Tapping Enabled\" 1"
-  spawn "xinput set-prop \"DELL081C:00 044E:121F Touchpad\" \"libinput Tapping Enabled\" 1"
-  spawn "xinput set-prop \"DELL081C:00 044E:121F Touchpad\" \"libinput Accel Speed\" 0.2"
   addScreenCorners [ (SCUpperRight, moveTo Next (Not emptyWS))
                      , (SCUpperLeft,  moveTo Prev (Not emptyWS))
                      ]
