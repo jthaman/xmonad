@@ -83,10 +83,8 @@ myStartupHook = do
   spawnOn "5" "pgrep signal || signal-desktop"
   -- Programs
   spawn "killall redshift"
-  spawn "killall trayer"
   spawn "xsetroot -cursor_name left_ptr"
-  spawn "pgrep trayer || trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 7 --height 24 --transparent true --alpha 0 --tint 0x000000"
-  spawn "feh --bg-scale ~/Pictures/Firefox_wallpaper.png"
+  spawn "feh --bg-scale /run/media/john/External Drive/Sync/Documents/pic.jpg"
   spawn "mullvad connect"
   spawn "mullvad"
   -- spawn "dunst"
@@ -96,7 +94,6 @@ myStartupHook = do
   spawn "pgrep nm-applet || nm-applet"
   spawn "pgrep xfce4-clipman || xfce4-clipman"
   spawn "pgrep volumeicon || volumeicon"
-  spawn "pgrep xfce4-power-manager || xfce4-power-manager"
   spawn "xss-lock -l -- xsecurelock"
   spawn "numlockx on"
   spawn "setxkbmap -option 'caps:escape'"
@@ -111,5 +108,5 @@ main :: IO ()
 main = xmonad
      . ewmhFullscreen
      . ewmh
-     . withEasySB (statusBarProp "xmobar ~/.xmonad/xmobarrc" (pure def)) defToggleStrutsKey
+     . withEasySB (statusBarProp "tint2" (pure def)) defToggleStrutsKey
      $ myConfig
