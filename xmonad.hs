@@ -20,6 +20,7 @@ import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ScreenCorners
+import XMonad.Hooks.Minimize
 
 import XMonad.Layout.Minimize
 import XMonad.Layout.Spacing
@@ -104,7 +105,8 @@ myStartupHook = do
   spawn "setxkbmap -option 'caps:escape'"
   spawn "xset r rate 300 40"
 
-myEventHook = screenCornerEventHook
+
+myEventHook = minimizeEventHook
 
 main :: IO ()
 main = xmonad
