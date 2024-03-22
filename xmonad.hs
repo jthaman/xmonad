@@ -10,7 +10,7 @@ import XMonad.Prompt.ConfirmPrompt
 import XMonad.Actions.DwmPromote
 import XMonad.Actions.SpawnOn
 import XMonad.Actions.Minimize
-import XMonad.Actions.CycleWS
+import XMonad.Actions.CycleWS -- I need to configure this.
 
 import Graphics.X11.ExtraTypes.XF86
 
@@ -40,17 +40,25 @@ myConfig = def
     }
     `additionalKeysP`
     [ ("M-<Return>" , dwmpromote)
+
+    -- Power
     , ("M-S-q", confirmPrompt def "exit" $ io (exitWith ExitSuccess))
     , ("M-S-l", spawn "systemctl suspend")
     , ("M-S-p", spawn "systemctl poweroff")
     , ("M-S-r", spawn "systemctl reboot")
+
+    -- Apps
     , ("M-S-s", spawn "xfce4-screenshooter")
-    , ("M-z", spawn "nemo")
     , ("M-p", spawn "rofi -show drun") -- use rofi for showing flatpaks
+    , ("M-d", spawn "rofi -show drun") -- use rofi for showing flatpaks
+    , ("M-f", spawn "nemo")
     , ("M-S-<Return>", spawn "gnome-terminal")
-    , ("M-x", spawn "catfish")
+
+    -- Window Management
     , ("M-m", withFocused minimizeWindow)
     , ("M-S-m", withLastMinimized maximizeWindowAndFocus)
+
+    -- Media
     , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume 0 +5%")
     , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume 0 -5%")
     , ("<XF86AudioMute>", spawn "pactl set-sink-mute 0 toggle")
@@ -63,9 +71,8 @@ myLayout =
   screenCornerLayoutHook
   $ minimize . BW.boringWindows
   $ spacingRaw False (Border 10 5 10 5) True (Border 5 10 5 10) True
-  $ gaps [(U,5), (R,150), (L,150), (D,5)]
+  $ gaps [(U,5), (R,250), (L,250), (D,5)]
   $ tiled
-  ||| Mirror tiled
   ||| Full
   where
     tiled   = Tall nmaster delta ratio
@@ -79,28 +86,23 @@ myStartupHook = do
   spawnOn "2" "pgrep keepassxc || keepassxc"
   spawnOn "2" "pgrep firefox || firefox"
   spawnOn "3" "pgrep emacs || emacs"
---  spawnOn "4" "pgrep rhythmbox || rhythmbox"
-  spawnOn "5" "pgrep signal || signal-desktop"
+  spawnOn "4" "pgrep strawberry || strawberry"
+  spawnOn "4" "pgrep signal || signal-desktop"
   -- Programs
   spawn "killall redshift"
   spawn "xsetroot -cursor_name left_ptr"
-  spawn "feh --bg-scale /run/media/john/External Drive/Sync/Documents/pic.jpg"
-  spawn "mullvad connect"
-  spawn "mullvad"
-  -- spawn "dunst"
+  spawn "feh --bg-scale ~/Pictures/pic.jpg"
   spawn "pgrep redshift || redshift -t 4000:4000 -l 38.90:-77.03"
   spawn "lxpolkit"
+  spawn "xinput set-prop \"USB Optical Mouse\"  \"libinput Accel Speed\" 0.8"
+  spawn "pgrep udiskie || udiskie -t"
   spawn "syncthing --no-browser"
   spawn "pgrep nm-applet || nm-applet"
   spawn "pgrep xfce4-clipman || xfce4-clipman"
   spawn "pgrep volumeicon || volumeicon"
   spawn "xss-lock -l -- xsecurelock"
-  spawn "numlockx on"
   spawn "setxkbmap -option 'caps:escape'"
   spawn "xset r rate 300 40"
-  addScreenCorners [ (SCUpperRight, moveTo Next (Not emptyWS))
-                     , (SCUpperLeft,  moveTo Prev (Not emptyWS))
-                     ]
 
 myEventHook = screenCornerEventHook
 
