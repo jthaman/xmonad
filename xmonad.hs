@@ -1,7 +1,7 @@
 import XMonad
 
 import XMonad.Util.Themes
-import XMonad.Util.Ungrab
+import XMonad.Operations (unGrab)
 import XMonad.Util.EZConfig
 
 import System.Exit
@@ -30,7 +30,7 @@ import qualified XMonad.Layout.BoringWindows as BW
 
 myConfig = def
     { modMask = mod1Mask
-    , terminal = "xfce4-terminal"
+    , terminal = "gnome-terminal"
     , startupHook = myStartupHook
     , borderWidth = 5
     , normalBorderColor = "#dfd5cf"
@@ -85,7 +85,7 @@ myStartupHook = do
   -- GUI Programs
   -- spawnOn "1" "pgrep thunderbird || thunderbird"
   spawnOn "2" "pgrep keepassxc || keepassxc"
-  spawnOn "2" "pgrep firefox || firefox"
+  spawnOn "2" "pgrep librewolf || librewolf"
   spawnOn "3" "pgrep emacs || emacs"
   spawnOn "4" "pgrep strawberry || strawberry"
   spawnOn "4" "pgrep signal || signal-desktop"
@@ -94,7 +94,7 @@ myStartupHook = do
   spawn "xsetroot -cursor_name left_ptr"
   spawn "feh --bg-scale ~/Pictures/pic.jpg"
   spawn "pgrep redshift || redshift -t 4000:4000 -l 38.90:-77.03"
-  spawn "lxpolkit"
+  spawn "gnome-settings-daemon"
   spawn "xinput set-prop \"USB Optical Mouse\"  \"libinput Accel Speed\" 0.8"
   spawn "pgrep udiskie || udiskie -t"
   spawn "syncthing --no-browser"
